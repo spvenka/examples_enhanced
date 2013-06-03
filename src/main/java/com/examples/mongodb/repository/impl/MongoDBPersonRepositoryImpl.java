@@ -18,9 +18,9 @@ import com.examples.mongodb.domain.MongoDBPerson;
 /**
  * Repository for {@link Person}s
  */
-@Repository
+//@Repository
 @Scope("singleton")
-public class MongoDBPersonRepositoryImpl{// implements PersonRepository{
+public class MongoDBPersonRepositoryImpl implements PersonRepository{
 
     static final Logger logger = LoggerFactory.getLogger(MongoDBPersonRepositoryImpl.class);
 
@@ -28,33 +28,33 @@ public class MongoDBPersonRepositoryImpl{// implements PersonRepository{
     MongoTemplate mongoTemplate;
     
     @SuppressWarnings("unchecked")
-	//@Override
+	@Override
     public List<MongoDBPerson> findAllPersons() {
         return mongoTemplate.findAll(MongoDBPerson.class);
     }
 
     @SuppressWarnings("unchecked")
-	//@Override
+	@Override
     public List<MongoDBPerson> findByName(String name) {
         return mongoTemplate.find(new Query(Criteria.where("name").is(name)), MongoDBPerson.class);
     }
 
-    //@Override
+    @Override
     public MongoDBPerson findById(String id) {
         return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id)), MongoDBPerson.class);
     }      
     
-    //@Override
+    @Override
     public void create(PersonDTO person) {
         mongoTemplate.insert(person);
     }
     
-    //@Override
+    @Override
     public void update(PersonDTO person)	{
 		mongoTemplate.save(person);
 	} 
 
-    //@Override
+    @Override
     public void delete(PersonDTO person) {
     	mongoTemplate.remove(person);
     }
@@ -62,7 +62,7 @@ public class MongoDBPersonRepositoryImpl{// implements PersonRepository{
     /**
      * Create a {@link Person} collection if the collection does not already exists
      */
-    //@Override
+    @Override
     public void createPersonCollection() {
         if (!mongoTemplate.collectionExists(PersonDTO.class)) {
             mongoTemplate.createCollection(PersonDTO.class);
@@ -72,7 +72,7 @@ public class MongoDBPersonRepositoryImpl{// implements PersonRepository{
     /**
      * Drops the {@link Person} collection if the collection does already exists
      */
-    //@Override
+    @Override
     public void dropPersonCollection() {
         if (mongoTemplate.collectionExists(PersonDTO.class)) {
             mongoTemplate.dropCollection(PersonDTO.class);

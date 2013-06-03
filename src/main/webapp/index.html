@@ -27,7 +27,7 @@
 <input type="text" id="name" name="name" required>
 
 <label>Age:</label>
-<input type="text" id="age" name="age"/>
+<input type="text" id="age" name="age" maxlength="2" onKeyPress="return numbersonly(this, event)"/>
 
 <label>Home town:</label>
 <input type="text" id="homeTown" name="homeTown"/>
